@@ -36,7 +36,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->name = $request->get('name');
+        $user->city = $request->get('city');
+        $user->save();
+        return response()->json($user);
     }
 
     /**
@@ -58,7 +62,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return response()->json($user);
     }
 
     /**
@@ -70,7 +75,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        $user->city = $request->get('city');
+        $user->update();
+        return response()->json($user);
     }
 
     /**
@@ -81,6 +90,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return response()->json($user);
     }
 }
